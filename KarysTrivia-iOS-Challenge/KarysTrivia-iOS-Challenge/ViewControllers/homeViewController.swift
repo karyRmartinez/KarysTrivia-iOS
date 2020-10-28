@@ -29,19 +29,26 @@ class homeViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    lazy var imageViewSet : UIImageView = {
+        let image = UIImageView()
+           image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "ThinkingCap")
+        return image
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         addSubviews()
-        setButtonConstraints()
+        settingUpConstraints()
     }
     
     private func addSubviews() {
         self.view.addSubview(startButton)
         self.view.addSubview(titleLabel)
+        self.view.addSubview(imageViewSet)
     }
     
-    private func setButtonConstraints() {
+    private func settingUpConstraints() {
     NSLayoutConstraint.activate([
     startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
     startButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 150),
@@ -50,7 +57,12 @@ class homeViewController: UIViewController {
             
     titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 120),
     titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                  
+    
+    imageViewSet.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 40),
+    imageViewSet.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+    imageViewSet.widthAnchor.constraint(equalToConstant: 200),
+    imageViewSet.heightAnchor.constraint(equalToConstant: 200),
+         
         ])
     }
  

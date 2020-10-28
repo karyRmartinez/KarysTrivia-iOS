@@ -17,6 +17,7 @@ class homeViewController: UIViewController {
         button.backgroundColor = .systemBlue
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(startButtonPressed), for: .touchUpInside)
         return button
     }()
     lazy var titleLabel: UILabel = {
@@ -35,6 +36,10 @@ class homeViewController: UIViewController {
         image.image = UIImage(named: "ThinkingCap")
         return image
     }()
+    
+    @objc func startButtonPressed() {
+        self.navigationController?.pushViewController(triviaQuestionsViewController(), animated: true)    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

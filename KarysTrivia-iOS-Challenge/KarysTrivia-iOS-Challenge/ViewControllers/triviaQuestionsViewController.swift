@@ -9,9 +9,19 @@
 import UIKit
 
 class triviaQuestionsViewController: UIViewController {
-
+    
+    lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let tqView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        tqView.register(questionsCollectionViewCell.self, forCellWithReuseIdentifier: "theCell")
+        tqView.backgroundColor = .systemPink
+        return tqView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
 
         // Do any additional setup after loading the view.
     }

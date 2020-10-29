@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+enum JSONError: Error {
+    case decodingError(Error)
+}
+
+struct triviaElement: Codable {
+    let question: String
+    let incorrect: [String]
+    let correct: String
+   
+    
+
+}

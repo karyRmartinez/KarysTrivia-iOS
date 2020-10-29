@@ -24,48 +24,58 @@ class triviaQuestionsViewController: UIViewController {
          }()
     lazy var optionAButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = .systemBlue
-    button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
     button.layer.cornerRadius = 12
            return button
        }()
     lazy var optionBButton: UIButton = {
      let button = UIButton()
-     button.backgroundColor = .systemBlue
-     button.translatesAutoresizingMaskIntoConstraints = false
+     button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
      button.layer.cornerRadius = 12
              return button
          }()
     lazy var optionCButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = .systemBlue
-    button.translatesAutoresizingMaskIntoConstraints = false
+    button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
     button.layer.cornerRadius = 12
             return button
          }()
     lazy var optionDButton: UIButton = {
              let button = UIButton()
-             button.backgroundColor = .systemBlue
-             button.translatesAutoresizingMaskIntoConstraints = false
+             button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
              button.layer.cornerRadius = 12
              return button
          }()
     func addSubview() {
         view.addSubview(questionLabel)
-        view.addSubview(optionAButton)
-        view.addSubview(optionBButton)
-        view.addSubview(optionCButton)
-        view.addSubview(optionDButton)
+        view.addSubview(stackView)
+
      }
   
     func giveQuestion() {
         let tquestion = user[initialQuestion]
         questionLabel.text = tquestion.question
     }
+
+    private lazy var stackView: UIStackView = {
+         let stackView = UIStackView(
+             arrangedSubviews: [
+                 optionAButton,
+                 optionBButton,
+                 optionCButton,
+                 optionDButton
+             ]
+         )
+         stackView.axis = .vertical
+         stackView.spacing = 15
+         stackView.distribution = .fillEqually
+         return stackView
+     }()
     override func viewDidLoad() {
     view.backgroundColor = .white
          addSubview()
-         setContraints()
+        setContraints()
+        setupStackViewConstraints()
         loadData()
         giveQuestion()
          super.viewDidLoad()
@@ -76,12 +86,19 @@ class triviaQuestionsViewController: UIViewController {
       questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
        questionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
      questionLabel.widthAnchor.constraint(equalToConstant: 300),
-     questionLabel.heightAnchor.constraint(equalToConstant: 35)
-    
+     questionLabel.heightAnchor.constraint(equalToConstant: 35),
     
     ])
      }
-    
+    private func setupStackViewConstraints() {
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+    stackView.topAnchor.constraint(equalTo: questionLabel.bottomAnchor, constant: 50),
+    stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+    stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+    stackView.heightAnchor.constraint(equalToConstant: 250)
+        ])
+    }
     
     private func loadData () {
     guard let pathToData = Bundle.main.path(forResource: "Apprentice_TandemFor400_Data", ofType: "json") else {

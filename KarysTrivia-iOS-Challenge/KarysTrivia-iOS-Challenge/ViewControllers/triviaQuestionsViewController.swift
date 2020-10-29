@@ -52,6 +52,10 @@ class triviaQuestionsViewController: UIViewController {
          }()
     func addSubview() {
         view.addSubview(questionLabel)
+        view.addSubview(optionAButton)
+        view.addSubview(optionBButton)
+        view.addSubview(optionCButton)
+        view.addSubview(optionDButton)
      }
   
     func giveQuestion() {
@@ -73,7 +77,9 @@ class triviaQuestionsViewController: UIViewController {
        questionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
      questionLabel.widthAnchor.constraint(equalToConstant: 300),
      questionLabel.heightAnchor.constraint(equalToConstant: 35)
-         ])
+    
+    
+    ])
      }
     
     

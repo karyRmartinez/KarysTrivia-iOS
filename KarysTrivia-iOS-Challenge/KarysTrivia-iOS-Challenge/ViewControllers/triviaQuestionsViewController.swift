@@ -22,7 +22,34 @@ class triviaQuestionsViewController: UIViewController {
     label.translatesAutoresizingMaskIntoConstraints = false
        return label
          }()
-    
+    lazy var optionAButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = .systemBlue
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.layer.cornerRadius = 12
+           return button
+       }()
+    lazy var optionBButton: UIButton = {
+     let button = UIButton()
+     button.backgroundColor = .systemBlue
+     button.translatesAutoresizingMaskIntoConstraints = false
+     button.layer.cornerRadius = 12
+             return button
+         }()
+    lazy var optionCButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = .systemBlue
+    button.translatesAutoresizingMaskIntoConstraints = false
+    button.layer.cornerRadius = 12
+            return button
+         }()
+    lazy var optionDButton: UIButton = {
+             let button = UIButton()
+             button.backgroundColor = .systemBlue
+             button.translatesAutoresizingMaskIntoConstraints = false
+             button.layer.cornerRadius = 12
+             return button
+         }()
     func addSubview() {
         view.addSubview(questionLabel)
      }

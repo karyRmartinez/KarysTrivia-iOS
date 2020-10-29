@@ -17,6 +17,14 @@ struct triviaElement: Codable {
     let incorrect: [String]
     let correct: String
    
-    
+    static func getUser(from data: Data) throws -> [triviaElement] {
+          do {
+              let trivia = try JSONDecoder().decode([triviaElement].self, from: data)
+              return trivia
+          } catch {
+              throw JSONError.decodingError(error)
+          }
+          
+      }
 
 }

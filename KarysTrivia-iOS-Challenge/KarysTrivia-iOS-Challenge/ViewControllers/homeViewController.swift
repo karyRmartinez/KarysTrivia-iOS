@@ -38,7 +38,9 @@ class homeViewController: UIViewController {
     }()
     
     @objc func startButtonPressed() {
-        self.navigationController?.pushViewController(triviaQuestionsViewController(), animated: true)    }
+        self.navigationController?.pushViewController(triviaQuestionsViewController(), animated: true)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

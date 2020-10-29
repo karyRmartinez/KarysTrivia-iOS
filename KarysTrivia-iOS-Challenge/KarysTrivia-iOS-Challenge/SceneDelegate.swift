@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.windowScene = scene
         window = UIWindow(windowScene: scene)
-        let navigationVC = UINavigationController(rootViewController: homeViewController())
+        let navigationVC = UINavigationController(rootViewController: triviaQuestionsViewController())
         window?.rootViewController = navigationVC
         window?.makeKeyAndVisible()
     }

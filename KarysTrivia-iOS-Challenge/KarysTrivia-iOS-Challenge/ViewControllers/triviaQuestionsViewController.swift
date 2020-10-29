@@ -13,7 +13,7 @@ class triviaQuestionsViewController: UIViewController {
     var user = [triviaElement]()
     var initialQuestion: Int = 0
      
-  lazy var titleLabel: UILabel = {
+  lazy var questionLabel: UILabel = {
      let label = UILabel()
      label.font = UIFont(name: "Optima-BOld", size: 16)
     label.textAlignment = .center
@@ -24,12 +24,12 @@ class triviaQuestionsViewController: UIViewController {
          }()
     
     func addSubview() {
-        view.addSubview(titleLabel)
+        view.addSubview(questionLabel)
      }
   
     func giveQuestion() {
         let tquestion = user[initialQuestion]
-        titleLabel.text = tquestion.question
+        questionLabel.text = tquestion.question
     }
     override func viewDidLoad() {
     view.backgroundColor = .white
@@ -42,10 +42,10 @@ class triviaQuestionsViewController: UIViewController {
 
     func setContraints() {
     NSLayoutConstraint.activate([
-             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-             titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
-             titleLabel.widthAnchor.constraint(equalToConstant: 130),
-             titleLabel.heightAnchor.constraint(equalToConstant: 35)
+      questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+       questionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
+     questionLabel.widthAnchor.constraint(equalToConstant: 300),
+     questionLabel.heightAnchor.constraint(equalToConstant: 35)
          ])
      }
     

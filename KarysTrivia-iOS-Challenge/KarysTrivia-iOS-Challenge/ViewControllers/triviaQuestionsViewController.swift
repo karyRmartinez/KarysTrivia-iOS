@@ -12,50 +12,72 @@ class triviaQuestionsViewController: UIViewController {
     
     var user = [triviaElement]()
     var initialQuestion: Int = 0
+    var selectedAnswer: Int = 0
+    var score = 0
+    var scoreIncrement = ""
+    var optionbuttons = [UIButton]()
      
   lazy var questionLabel: UILabel = {
      let label = UILabel()
-     label.font = UIFont(name: "Optima-BOld", size: 16)
-    label.textAlignment = .center
-    label.textColor = .black
-    label.backgroundColor = .white
-    label.translatesAutoresizingMaskIntoConstraints = false
+         label.font = UIFont(name: "Optima-BOld", size: 16)
+         label.textAlignment = .center
+         label.textColor = .black
+         label.backgroundColor = .white
+        label.translatesAutoresizingMaskIntoConstraints = false
        return label
          }()
+    lazy var scoreLabel: UILabel = {
+    let label = UILabel()
+        label.text = "0/0"
+        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     lazy var optionAButton: UIButton = {
     let button = UIButton()
-        button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
+        button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
     button.layer.cornerRadius = 12
            return button
        }()
     lazy var optionBButton: UIButton = {
      let button = UIButton()
-     button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
+     button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
      button.layer.cornerRadius = 12
              return button
          }()
     lazy var optionCButton: UIButton = {
     let button = UIButton()
-    button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
+    button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
     button.layer.cornerRadius = 12
             return button
          }()
     lazy var optionDButton: UIButton = {
              let button = UIButton()
-             button.backgroundColor = #colorLiteral(red: 0.4745098054, green: 0.8392156959, blue: 0.9764705896, alpha: 0.4713541667)
+             button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
              button.layer.cornerRadius = 12
              return button
          }()
     func addSubview() {
         view.addSubview(questionLabel)
+        view.addSubview(scoreLabel)
         view.addSubview(stackView)
 
      }
   
-    func giveQuestion() {
+    func questionsAndAnswers() {
         let tquestion = user[initialQuestion]
         questionLabel.text = tquestion.question
+      
+        let shuffledQ = tquestion.AllPosibbleAnswers()
+       optionbuttons = [optionAButton, optionBButton, optionCButton, optionDButton]
+        optionbuttons.forEach{$0.isHidden = true}
+        for (index, answer) in shuffledQ.enumerated() {
+                  optionbuttons[index].isHidden = false
+                  optionbuttons[index].setTitle(answer, for: .normal)
+              }
     }
+   
 
     private lazy var stackView: UIStackView = {
          let stackView = UIStackView(
@@ -77,7 +99,7 @@ class triviaQuestionsViewController: UIViewController {
         setContraints()
         setupStackViewConstraints()
         loadData()
-        giveQuestion()
+        questionsAndAnswers()
          super.viewDidLoad()
     }
 
@@ -87,6 +109,11 @@ class triviaQuestionsViewController: UIViewController {
        questionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
      questionLabel.widthAnchor.constraint(equalToConstant: 300),
      questionLabel.heightAnchor.constraint(equalToConstant: 35),
+     
+     scoreLabel.heightAnchor.constraint(equalToConstant: 20),
+     scoreLabel.widthAnchor.constraint(equalToConstant: 150),
+     scoreLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 70),
+     scoreLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80)
     
     ])
      }
@@ -99,6 +126,7 @@ class triviaQuestionsViewController: UIViewController {
     stackView.heightAnchor.constraint(equalToConstant: 250)
         ])
     }
+    
     
     private func loadData () {
     guard let pathToData = Bundle.main.path(forResource: "Apprentice_TandemFor400_Data", ofType: "json") else {

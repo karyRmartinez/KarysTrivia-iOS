@@ -10,58 +10,60 @@ import UIKit
 
 class triviaQuestionsViewController: UIViewController {
     
-    lazy var myCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
-    collectionView.register(questionsCollectionViewCell.self,forCellWithReuseIdentifier: "theCell")
-        collectionView.backgroundColor = .systemPink
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        return collectionView
-    }()
+    var user = [triviaElement]()
+    var initialQuestion: Int = 0
+     
+  lazy var titleLabel: UILabel = {
+     let label = UILabel()
+     label.font = UIFont(name: "Optima-BOld", size: 16)
+    label.textAlignment = .center
+    label.textColor = .black
+    label.backgroundColor = .white
+    label.translatesAutoresizingMaskIntoConstraints = false
+       return label
+         }()
     
     func addSubview() {
-     self.view.addSubview(myCollectionView)
+        view.addSubview(titleLabel)
      }
-    
+  
+    func giveQuestion() {
+        let tquestion = user[initialQuestion]
+        titleLabel.text = tquestion.question
+    }
     override func viewDidLoad() {
-    view.backgroundColor = .red
-     setUpCollectionViewConstraints()
-       myCollectionView.dataSource = self
-       myCollectionView.delegate = self
-        addSubview()
+    view.backgroundColor = .white
+         addSubview()
+         setContraints()
+        loadData()
+        giveQuestion()
          super.viewDidLoad()
     }
 
+    func setContraints() {
+    NSLayoutConstraint.activate([
+             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+             titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
+             titleLabel.widthAnchor.constraint(equalToConstant: 130),
+             titleLabel.heightAnchor.constraint(equalToConstant: 35)
+         ])
+     }
+    
+    
+    private func loadData () {
+    guard let pathToData = Bundle.main.path(forResource: "Apprentice_TandemFor400_Data", ofType: "json") else {
+            fatalError("Apprentice_TandemFor400_Data.json file not found")
+                }
 
-    private func setUpCollectionViewConstraints(){
+      let internalUrl = URL(fileURLWithPath: pathToData)
+        do {
+         let data = try Data(contentsOf: internalUrl)
+         let userFromJSON = try triviaElement.getUser(from: data)
+          user = userFromJSON
+               }
+               catch {
+                   fatalError("An error occurred: \(error)")
+               }
 
-        myCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
-        myCollectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor).isActive = true
-        myCollectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor).isActive = true
-        myCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
-
-    }
-    
-}
-extension triviaQuestionsViewController: UICollectionViewDataSource,UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "theCell", for: indexPath) as? questionsCollectionViewCell else {
-            return UICollectionViewCell()
-        }
-        return cell
-    }
-    
-    
-}
-extension triviaQuestionsViewController: UICollectionViewDelegateFlowLayout {
-   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 200, height: 200)
-    }
+           }
 }

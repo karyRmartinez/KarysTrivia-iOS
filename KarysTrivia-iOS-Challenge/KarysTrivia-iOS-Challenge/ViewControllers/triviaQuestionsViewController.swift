@@ -19,7 +19,7 @@ class triviaQuestionsViewController: UIViewController {
      
   lazy var questionLabel: UILabel = {
      let label = UILabel()
-         label.font = UIFont(name: "Optima-BOld", size: 16)
+         label.font = UIFont(name: "Optima-BOld", size: 17)
          label.textAlignment = .center
          label.textColor = .black
          label.backgroundColor = .white
@@ -28,8 +28,16 @@ class triviaQuestionsViewController: UIViewController {
          }()
     lazy var scoreLabel: UILabel = {
     let label = UILabel()
-        label.text = "0/0"
+        label.text = "0/0 "
         label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    lazy var queNumberLabel: UILabel = {
+        let label = UILabel()
+        label.text = "0/0"
+        label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 16)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -61,6 +69,7 @@ class triviaQuestionsViewController: UIViewController {
     func addSubview() {
         view.addSubview(questionLabel)
         view.addSubview(scoreLabel)
+        view.addSubview(queNumberLabel)
         view.addSubview(stackView)
 
      }
@@ -112,8 +121,13 @@ class triviaQuestionsViewController: UIViewController {
      
      scoreLabel.heightAnchor.constraint(equalToConstant: 20),
      scoreLabel.widthAnchor.constraint(equalToConstant: 150),
-     scoreLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 70),
-     scoreLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80)
+     scoreLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20),
+     scoreLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80),
+    
+     queNumberLabel.heightAnchor.constraint(equalToConstant: 20),
+    queNumberLabel.widthAnchor.constraint(equalToConstant: 150),
+    queNumberLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20),
+    queNumberLabel.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -80)
     
     ])
      }

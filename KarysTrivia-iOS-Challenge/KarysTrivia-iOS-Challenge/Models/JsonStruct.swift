@@ -16,7 +16,7 @@ struct triviaElement: Codable {
     let question: String
     let incorrect: [String]
     let correct: String
-   
+  
     public func AllPosibbleAnswers() -> [String] {
         var shuffleOptions = incorrect
         shuffleOptions.append(correct)

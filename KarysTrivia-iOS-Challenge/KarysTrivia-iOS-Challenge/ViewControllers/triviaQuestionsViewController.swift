@@ -14,18 +14,27 @@ class triviaQuestionsViewController: UIViewController {
     var initialQuestion: Int = 0
     var selectedAnswer: Int = 0
     var score = 0
-    var scoreIncrement = ""
     var optionbuttons = [UIButton]()
+    
      
   lazy var questionLabel: UILabel = {
      let label = UILabel()
          label.font = UIFont(name: "Optima-BOld", size: 17)
          label.textAlignment = .center
          label.textColor = .black
-         label.backgroundColor = .white
+    label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         label.translatesAutoresizingMaskIntoConstraints = false
        return label
          }()
+    lazy var screenLabel: UILabel = {
+       let label = UILabel()
+           label.font = UIFont(name: "Optima-BOld", size: 17)
+           label.textAlignment = .center
+           label.textColor = .black
+           label.backgroundColor = .white
+          label.translatesAutoresizingMaskIntoConstraints = false
+         return label
+           }()
     lazy var scoreLabel: UILabel = {
     let label = UILabel()
         label.text = "0/0 "
@@ -45,6 +54,7 @@ class triviaQuestionsViewController: UIViewController {
     lazy var optionAButton: UIButton = {
     let button = UIButton()
         button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
+        button.addTarget(self, action: #selector(answerButtonPressed(sender:)), for: .touchUpInside)
     button.layer.cornerRadius = 12
            return button
        }()
@@ -52,42 +62,64 @@ class triviaQuestionsViewController: UIViewController {
      let button = UIButton()
      button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
      button.layer.cornerRadius = 12
+          button.addTarget(self, action: #selector(answerButtonPressed(sender:)), for: .touchUpInside)
              return button
          }()
     lazy var optionCButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
     button.layer.cornerRadius = 12
+          button.addTarget(self, action: #selector(answerButtonPressed(sender:)), for: .touchUpInside)
             return button
          }()
     lazy var optionDButton: UIButton = {
              let button = UIButton()
              button.backgroundColor = #colorLiteral(red: 0, green: 0.4784313725, blue: 1, alpha: 0.3341596554)
              button.layer.cornerRadius = 12
+          button.addTarget(self, action: #selector(answerButtonPressed(sender:)), for: .touchUpInside)
              return button
          }()
-    func addSubview() {
+  private func addSubview() {
         view.addSubview(questionLabel)
+        view.addSubview(scoreLabel)
         view.addSubview(scoreLabel)
         view.addSubview(queNumberLabel)
         view.addSubview(stackView)
 
      }
   
-    func questionsAndAnswers() {
+   private func questionsAndAnswers() {
         let tquestion = user[initialQuestion]
         questionLabel.text = tquestion.question
       
         let shuffledQ = tquestion.AllPosibbleAnswers()
+            
        optionbuttons = [optionAButton, optionBButton, optionCButton, optionDButton]
         optionbuttons.forEach{$0.isHidden = true}
+    
         for (index, answer) in shuffledQ.enumerated() {
                   optionbuttons[index].isHidden = false
                   optionbuttons[index].setTitle(answer, for: .normal)
               }
-    }
-   
 
+    }
+
+    private func updateTrivia() {
+  
+    }
+    @objc func answerButtonPressed(sender: UIButton) {
+        let unwrappedQue = user[initialQuestion]
+        if sender.titleLabel?.text == unwrappedQue.correct {
+            self.view.backgroundColor = .green
+            self.questionsAndAnswers()
+            self.score += 1
+           
+        }
+         else {
+            self.view.backgroundColor = .red
+            self.questionsAndAnswers()
+        }
+}
     private lazy var stackView: UIStackView = {
          let stackView = UIStackView(
              arrangedSubviews: [
@@ -110,7 +142,25 @@ class triviaQuestionsViewController: UIViewController {
         loadData()
         questionsAndAnswers()
          super.viewDidLoad()
+        
     }
+    
+    private func loadData () {
+    guard let pathToData = Bundle.main.path(forResource: "Apprentice_TandemFor400_Data", ofType: "json") else {
+            fatalError("Apprentice_TandemFor400_Data.json file not found")
+                }
+
+      let internalUrl = URL(fileURLWithPath: pathToData)
+        do {
+         let data = try Data(contentsOf: internalUrl)
+         let userFromJSON = try triviaElement.getUser(from: data)
+          user = userFromJSON
+               }
+               catch {
+                   fatalError("An error occurred: \(error)")
+               }
+
+           }
 
     func setContraints() {
     NSLayoutConstraint.activate([
@@ -141,21 +191,5 @@ class triviaQuestionsViewController: UIViewController {
         ])
     }
     
-    
-    private func loadData () {
-    guard let pathToData = Bundle.main.path(forResource: "Apprentice_TandemFor400_Data", ofType: "json") else {
-            fatalError("Apprentice_TandemFor400_Data.json file not found")
-                }
 
-      let internalUrl = URL(fileURLWithPath: pathToData)
-        do {
-         let data = try Data(contentsOf: internalUrl)
-         let userFromJSON = try triviaElement.getUser(from: data)
-          user = userFromJSON
-               }
-               catch {
-                   fatalError("An error occurred: \(error)")
-               }
-
-           }
 }

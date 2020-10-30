@@ -14,10 +14,9 @@
 		6B53BB982548A81E00A1AB51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B53BB972548A81E00A1AB51 /* Assets.xcassets */; };
 		6B53BB9B2548A81E00A1AB51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B53BB992548A81E00A1AB51 /* LaunchScreen.storyboard */; };
 		6B53BBA42548AAE800A1AB51 /* JsonStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBA32548AAE800A1AB51 /* JsonStruct.swift */; };
-		6B53BBA72548AB1F00A1AB51 /* JsonTriviaFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBA62548AB1F00A1AB51 /* JsonTriviaFile.swift */; };
-		6B53BBD52549D20D00A1AB51 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD42549D20D00A1AB51 /* homeViewController.swift */; };
-		6B53BBD72549EC6800A1AB51 /* triviaQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD62549EC6800A1AB51 /* triviaQuestionsViewController.swift */; };
-		6B53BBD92549F45300A1AB51 /* questionsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD82549F45300A1AB51 /* questionsCollectionViewCell.swift */; };
+		6B53BBD52549D20D00A1AB51 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD42549D20D00A1AB51 /* HomeViewController.swift */; };
+		6B53BBD72549EC6800A1AB51 /* TriviaQuestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD62549EC6800A1AB51 /* TriviaQuestionsViewController.swift */; };
+		6B53BBD92549F45300A1AB51 /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B53BBD82549F45300A1AB51 /* Score.swift */; };
 		6BDF7C9F254B19460052A59F /* Apprentice_TandemFor400_Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 6BDF7C9E254B19460052A59F /* Apprentice_TandemFor400_Data.json */; };
 /* End PBXBuildFile section */
 
@@ -31,10 +30,9 @@
 		6B53BB9A2548A81E00A1AB51 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6B53BB9C2548A81E00A1AB51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6B53BBA32548AAE800A1AB51 /* JsonStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonStruct.swift; sourceTree = "<group>"; };
-		6B53BBA62548AB1F00A1AB51 /* JsonTriviaFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonTriviaFile.swift; sourceTree = "<group>"; };
-		6B53BBD42549D20D00A1AB51 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
-		6B53BBD62549EC6800A1AB51 /* triviaQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = triviaQuestionsViewController.swift; sourceTree = "<group>"; };
-		6B53BBD82549F45300A1AB51 /* questionsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = questionsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6B53BBD42549D20D00A1AB51 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		6B53BBD62549EC6800A1AB51 /* TriviaQuestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriviaQuestionsViewController.swift; sourceTree = "<group>"; };
+		6B53BBD82549F45300A1AB51 /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		6BDF7C9E254B19460052A59F /* Apprentice_TandemFor400_Data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Apprentice_TandemFor400_Data.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +67,6 @@
 			isa = PBXGroup;
 			children = (
 				6B53BBD32549D1E500A1AB51 /* ViewControllers */,
-				6B53BBA52548AAF800A1AB51 /* Jsonfile */,
 				6B53BBA22548AAB300A1AB51 /* Models */,
 				6B53BB8E2548A81C00A1AB51 /* AppDelegate.swift */,
 				6B53BB902548A81C00A1AB51 /* SceneDelegate.swift */,
@@ -91,20 +88,12 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		6B53BBA52548AAF800A1AB51 /* Jsonfile */ = {
-			isa = PBXGroup;
-			children = (
-				6B53BBA62548AB1F00A1AB51 /* JsonTriviaFile.swift */,
-			);
-			path = Jsonfile;
-			sourceTree = "<group>";
-		};
 		6B53BBD32549D1E500A1AB51 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				6B53BBD42549D20D00A1AB51 /* homeViewController.swift */,
-				6B53BBD62549EC6800A1AB51 /* triviaQuestionsViewController.swift */,
-				6B53BBD82549F45300A1AB51 /* questionsCollectionViewCell.swift */,
+				6B53BBD42549D20D00A1AB51 /* HomeViewController.swift */,
+				6B53BBD62549EC6800A1AB51 /* TriviaQuestionsViewController.swift */,
+				6B53BBD82549F45300A1AB51 /* Score.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -182,10 +171,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6B53BB932548A81C00A1AB51 /* ViewController.swift in Sources */,
-				6B53BBD72549EC6800A1AB51 /* triviaQuestionsViewController.swift in Sources */,
-				6B53BBD92549F45300A1AB51 /* questionsCollectionViewCell.swift in Sources */,
-				6B53BBD52549D20D00A1AB51 /* homeViewController.swift in Sources */,
-				6B53BBA72548AB1F00A1AB51 /* JsonTriviaFile.swift in Sources */,
+				6B53BBD72549EC6800A1AB51 /* TriviaQuestionsViewController.swift in Sources */,
+				6B53BBD92549F45300A1AB51 /* Score.swift in Sources */,
+				6B53BBD52549D20D00A1AB51 /* HomeViewController.swift in Sources */,
 				6B53BB8F2548A81C00A1AB51 /* AppDelegate.swift in Sources */,
 				6B53BBA42548AAE800A1AB51 /* JsonStruct.swift in Sources */,
 				6B53BB912548A81C00A1AB51 /* SceneDelegate.swift in Sources */,

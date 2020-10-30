@@ -8,10 +8,15 @@
 
 import UIKit
 
-class triviaQuestionsViewController: UIViewController {
+class TriviaQuestionsViewController: UIViewController {
     
-    var user = [triviaElement]()
-    var initialQuestion: Int = 0
+    var allTrivia = [TriviaElement]()
+    var currentQuestion: Int = 0 {
+        didSet {
+            gotoQuestion(questionNumber: currentQuestion)
+            print(currentQuestion)
+        }
+    }
     var selectedAnswer: Int = 0
     var score = 0
     var optionbuttons = [UIButton]()
@@ -88,37 +93,39 @@ class triviaQuestionsViewController: UIViewController {
 
      }
   
-   private func questionsAndAnswers() {
-        let tquestion = user[initialQuestion]
-        questionLabel.text = tquestion.question
+    private func gotoQuestion(questionNumber: Int )  {
+        let triviaElement = allTrivia[questionNumber]
+        questionLabel.text = triviaElement.question
+        scoreLabel.text = "score: \(score)"
+    
       
-        let shuffledQ = tquestion.AllPosibbleAnswers()
+        let shuffledAnswers = triviaElement.shuffledAnswers()
             
        optionbuttons = [optionAButton, optionBButton, optionCButton, optionDButton]
-        optionbuttons.forEach{$0.isHidden = true}
-    
-        for (index, answer) in shuffledQ.enumerated() {
-                  optionbuttons[index].isHidden = false
+
+        for (index, answer) in shuffledAnswers.enumerated() {
                   optionbuttons[index].setTitle(answer, for: .normal)
               }
 
     }
 
-    private func updateTrivia() {
-  
-    }
     @objc func answerButtonPressed(sender: UIButton) {
-        let unwrappedQue = user[initialQuestion]
-        if sender.titleLabel?.text == unwrappedQue.correct {
+        let triviaQuestion = allTrivia[currentQuestion]
+        if sender.titleLabel?.text == triviaQuestion.correct {
             self.view.backgroundColor = .green
-            self.questionsAndAnswers()
             self.score += 1
            
         }
          else {
             self.view.backgroundColor = .red
-            self.questionsAndAnswers()
         }
+        if currentQuestion + 1 >= allTrivia.count {
+            print("next question index is out of range")
+        }else {
+            self.currentQuestion += 1
+        }
+       
+       
 }
     private lazy var stackView: UIStackView = {
          let stackView = UIStackView(
@@ -140,9 +147,9 @@ class triviaQuestionsViewController: UIViewController {
         setContraints()
         setupStackViewConstraints()
         loadData()
-        questionsAndAnswers()
+        gotoQuestion(questionNumber: 0)
          super.viewDidLoad()
-        
+        print("all trivia count is\(allTrivia.count)")
     }
     
     private func loadData () {
@@ -153,8 +160,8 @@ class triviaQuestionsViewController: UIViewController {
       let internalUrl = URL(fileURLWithPath: pathToData)
         do {
          let data = try Data(contentsOf: internalUrl)
-         let userFromJSON = try triviaElement.getUser(from: data)
-          user = userFromJSON
+         let allTrivia = try TriviaElement.getTrivia(from: data)
+            self.allTrivia = Array(allTrivia.shuffled().prefix(10))
                }
                catch {
                    fatalError("An error occurred: \(error)")

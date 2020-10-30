@@ -12,19 +12,20 @@ enum JSONError: Error {
     case decodingError(Error)
 }
 
-struct triviaElement: Codable {
+struct TriviaElement: Codable {
     let question: String
     let incorrect: [String]
     let correct: String
   
-    public func AllPosibbleAnswers() -> [String] {
+   func shuffledAnswers() -> [String] {
         var shuffleOptions = incorrect
         shuffleOptions.append(correct)
         return shuffleOptions.shuffled()
     }
-    static func getUser(from data: Data) throws -> [triviaElement] {
+    
+    static func getTrivia(from data: Data) throws -> [TriviaElement] {
           do {
-              let trivia = try JSONDecoder().decode([triviaElement].self, from: data)
+              let trivia = try JSONDecoder().decode([TriviaElement].self, from: data)
               return trivia
           } catch {
               throw JSONError.decodingError(error)

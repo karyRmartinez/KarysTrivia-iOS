@@ -8,9 +8,8 @@
 
 import UIKit
 
-class homeViewController: UIViewController {
-    
-    
+class HomeViewController: UIViewController {
+ 
     lazy var startButton: UIButton = {
         let button = UIButton()
         button.setTitle("Start", for: .normal)
@@ -38,7 +37,7 @@ class homeViewController: UIViewController {
     }()
     
     @objc func startButtonPressed() {
-        self.navigationController?.pushViewController(triviaQuestionsViewController(), animated: true)
+        self.navigationController?.pushViewController(TriviaQuestionsViewController(), animated: true)
         
     }
     

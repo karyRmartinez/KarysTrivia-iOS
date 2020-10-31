@@ -24,8 +24,9 @@ class TriviaQuestionsViewController: UIViewController {
      
   lazy var questionLabel: UILabel = {
      let label = UILabel()
-         label.font = UIFont(name: "Optima-BOld", size: 17)
+         label.font = UIFont(name: "Optima-BOld", size: 20)
          label.textAlignment = .center
+    label.adjustsFontSizeToFitWidth = true
          label.textColor = .black
     label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -97,6 +98,7 @@ class TriviaQuestionsViewController: UIViewController {
         let triviaElement = allTrivia[questionNumber]
         questionLabel.text = triviaElement.question
         scoreLabel.text = "score: \(score)"
+        queNumberLabel.text = "\(currentQuestion + 1) / 10"
     
       
         let shuffledAnswers = triviaElement.shuffledAnswers()
@@ -107,26 +109,46 @@ class TriviaQuestionsViewController: UIViewController {
                   optionbuttons[index].setTitle(answer, for: .normal)
               }
 
+
     }
 
+    func restartQuiz() {
+        score = 0
+        gotoQuestion(questionNumber: currentQuestion)
+    }
+    
     @objc func answerButtonPressed(sender: UIButton) {
         let triviaQuestion = allTrivia[currentQuestion]
         if sender.titleLabel?.text == triviaQuestion.correct {
+        showErrorAlert(title: "correct", message: "Keep Going!")
             self.view.backgroundColor = .green
             self.score += 1
+            
            
         }
          else {
             self.view.backgroundColor = .red
+    
         }
         if currentQuestion + 1 >= allTrivia.count {
-            print("next question index is out of range")
+            
         }else {
             self.currentQuestion += 1
+       showErrorAlert(title:"Incorrect", message: "Correct answer: \(triviaQuestion.correct)")
+           
         }
-       
+       let alert = UIAlertController(title: "Score: \(score)", message: "End of Quiz. Do you want to start over?", preferredStyle: .alert)
+                 let restartAction = UIAlertAction(title: "Restart", style: .default, handler: {action in self.restartQuiz()})
+                 alert.addAction(restartAction)
+                 present(alert, animated: true, completion: nil)
        
 }
+    private func showErrorAlert(title: String, message: String) {
+          let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+          alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+          present(alertVC, animated: true, completion: nil)
+      }
+    
     private lazy var stackView: UIStackView = {
          let stackView = UIStackView(
              arrangedSubviews: [

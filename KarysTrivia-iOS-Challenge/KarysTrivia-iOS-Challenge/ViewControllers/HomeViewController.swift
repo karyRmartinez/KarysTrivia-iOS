@@ -24,7 +24,7 @@ class HomeViewController: UIViewController {
         label.backgroundColor = .white
         label.textColor = .systemBlue
         label.textAlignment = .center
-        label.text = "Tandem Trvia"
+        label.text = "Tandem Trivia"
         label.font = UIFont(name: "savoyeLetPlain", size: 50)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label

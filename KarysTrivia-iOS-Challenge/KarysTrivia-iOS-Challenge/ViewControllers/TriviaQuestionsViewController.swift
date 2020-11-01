@@ -113,9 +113,7 @@ class TriviaQuestionsViewController: UIViewController {
 
     }
 
-    func restartQuiz() {
-        score = 0
-        gotoQuestion(questionNumber: currentQuestion)
+    func restartQuiz() {   self.navigationController?.pushViewController(HomeViewController(), animated: true)
 
     }
     

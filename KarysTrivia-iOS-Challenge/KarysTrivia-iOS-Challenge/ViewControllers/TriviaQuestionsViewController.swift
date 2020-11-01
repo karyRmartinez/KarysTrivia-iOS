@@ -26,17 +26,18 @@ class TriviaQuestionsViewController: UIViewController {
      let label = UILabel()
          label.font = UIFont(name: "Optima-BOld", size: 20)
          label.textAlignment = .center
-    label.adjustsFontSizeToFitWidth = true
+         label.adjustsFontSizeToFitWidth = true
+         label.numberOfLines = 2
          label.textColor = .black
-    label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
+         label.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0)
         label.translatesAutoresizingMaskIntoConstraints = false
        return label
          }()
     lazy var screenLabel: UILabel = {
        let label = UILabel()
            label.font = UIFont(name: "Optima-BOld", size: 17)
-           label.textAlignment = .center
-           label.textColor = .black
+        label.textAlignment = .center
+            label.textColor = .black
            label.backgroundColor = .white
           label.translatesAutoresizingMaskIntoConstraints = false
          return label
@@ -115,19 +116,18 @@ class TriviaQuestionsViewController: UIViewController {
     func restartQuiz() {
         score = 0
         gotoQuestion(questionNumber: currentQuestion)
+
     }
     
     @objc func answerButtonPressed(sender: UIButton) {
         let triviaQuestion = allTrivia[currentQuestion]
         if sender.titleLabel?.text == triviaQuestion.correct {
         showErrorAlert(title: "correct", message: "Keep Going!")
-            self.view.backgroundColor = .green
+          //  self.view.backgroundColor = .green
             self.score += 1
-            
-           
         }
          else {
-            self.view.backgroundColor = .red
+          //  self.view.backgroundColor = .red
     
         }
         if currentQuestion + 1 >= allTrivia.count {
@@ -137,7 +137,7 @@ class TriviaQuestionsViewController: UIViewController {
        showErrorAlert(title:"Incorrect", message: "Correct answer: \(triviaQuestion.correct)")
            
         }
-       let alert = UIAlertController(title: "Score: \(score)", message: "End of Quiz. Do you want to start over?", preferredStyle: .alert)
+       let alert = UIAlertController(title: "Score: \(score)", message: "End of Trivia. Do you want to start over?", preferredStyle: .alert)
                  let restartAction = UIAlertAction(title: "Restart", style: .default, handler: {action in self.restartQuiz()})
                  alert.addAction(restartAction)
                  present(alert, animated: true, completion: nil)
@@ -195,8 +195,8 @@ class TriviaQuestionsViewController: UIViewController {
     NSLayoutConstraint.activate([
       questionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
        questionLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -150),
-     questionLabel.widthAnchor.constraint(equalToConstant: 300),
-     questionLabel.heightAnchor.constraint(equalToConstant: 35),
+     questionLabel.widthAnchor.constraint(equalToConstant: 350),
+     questionLabel.heightAnchor.constraint(equalToConstant: 55),
      
      scoreLabel.heightAnchor.constraint(equalToConstant: 20),
      scoreLabel.widthAnchor.constraint(equalToConstant: 150),

@@ -37,10 +37,11 @@ class HomeViewController: UIViewController {
     }()
     
     @objc func startButtonPressed() {
-        self.navigationController?.pushViewController(TriviaQuestionsViewController(), animated: true)
+self.navigationController?.pushViewController(TriviaQuestionsViewController(), animated: true)
         
     }
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white

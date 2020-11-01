@@ -39,6 +39,3 @@ Json file provided by Tandem.
 - Add confetti animation if user scores a perfect 10.
 - Add diffucilty levels to categorize the questions (i.e. easy, medium, hard)
 
-### Challenges
-
-
